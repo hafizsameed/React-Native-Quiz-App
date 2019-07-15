@@ -15,10 +15,10 @@ export default class Quiz extends React.Component{
     }
     next(){
       this.setState({next:true})
-      const {wrong,questions,index,selectedOption,correct}=this.state;
+      const {wrong,questions,index,selectedOption,correct,min,sec}=this.state;
       if(index>=9){  
         this.setState({flag:false})
-        this.props.navigation.navigate('Result',{correct:correct,wrong:wrong,index:index})
+        this.props.navigation.navigate('Result',{correct:correct,wrong:wrong,index:index,min,sec})
       }
        if(questions[index].correct_answer===selectedOption){
         this.setState({correct:correct+1})
@@ -53,19 +53,13 @@ export default class Quiz extends React.Component{
         })
         .then((data)=>{
           data.results.map((each)=>{
-            option=[...each.incorrect_answers];
-            var random=Math.round(Math.random()*3);
+            option=[...each.incorrect_answers,each.correct_answer];
+            var sortedopts=option.sort()
             // console.log(random);
-            var temp=option[random];
-            option[random]=each.correct_answer;
-            for(i=0;i<4;i++)
-            if(option[i]===''||option[i]===undefined){
-              option[i]=temp;
-            }
             this.setState({start:true})
             // console.log(option,'options')
             // option.push(temp);
-            each.options=[...option];
+            each.options=[...sortedopts];
             arr.push(each);
             // console.log(each,'each');
           })

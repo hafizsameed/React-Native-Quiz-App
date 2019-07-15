@@ -19,7 +19,9 @@ render(){
           <Text style={{fontSize:20,color:'black',padding:10}}>Attempted:{this.props.navigation.getParam('index')+1}</Text>
           <Text style={{fontSize:20,color:'black',padding:10}}>Correct:{this.props.navigation.getParam('correct')+1}</Text>
           <Text style={{fontSize:20,color:'black',padding:10}}>Wrong:{this.props.navigation.getParam('wrong')}</Text>
-      </View>
+          <Text style={{fontSize:20,color:'black',padding:10}}>Time:{this.props.navigation.getParam('min')} Mins and {this.props.navigation.getParam('sec')} Secs</Text>
+         
+       </View>
       <View style={{padding:10,width:'100%',backgroundColor:'white',borderTopWidth:1}}> 
       <Button onPress={()=>{this.props.navigation.navigate('Start')}} color='#487908'  title='Start Again'/>
       </View>
